@@ -5,7 +5,7 @@ import guru.springframework.msscbeerservice.repositories.BeerRepository;
 import guru.springframework.msscbeerservice.web.controller.NotFoundException;
 import guru.springframework.msscbeerservice.web.mapper.BeerMapper;
 import guru.springframework.msscbeerservice.web.model.BeerDto;
-import guru.springframework.msscbeerservice.web.model.BeerPageList;
+import guru.springframework.msscbeerservice.web.model.BeerPagedList;
 import guru.springframework.msscbeerservice.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
@@ -30,9 +30,9 @@ public class BeerServiceImpl implements BeerService {
 
     @Cacheable(cacheNames = "beerListCache", condition = "#showInventoryOnHand == false ")
     @Override
-    public BeerPageList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest, Boolean showInventoryOnHand) {
+    public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest, Boolean showInventoryOnHand) {
 
-        BeerPageList beerPageList;
+        BeerPagedList beerPagedList;
         Page<Beer> beerPage;
 
         if (!StringUtils.isEmpty(beerName) && !StringUtils.isEmpty(beerStyle)) {
@@ -52,7 +52,7 @@ public class BeerServiceImpl implements BeerService {
         }
 
         if (showInventoryOnHand) {
-            beerPageList = new BeerPageList(beerPage
+            beerPagedList = new BeerPagedList(beerPage
                     .getContent()
                     .stream()
                     .map(beerMapper::beerToBeerDtoWithInventory)
@@ -63,7 +63,7 @@ public class BeerServiceImpl implements BeerService {
                     beerPage.getTotalElements());
 
         } else {
-            beerPageList = new BeerPageList(beerPage
+            beerPagedList = new BeerPagedList(beerPage
                     .getContent()
                     .stream()
                     .map(beerMapper::beerToBeerDto)
@@ -75,7 +75,7 @@ public class BeerServiceImpl implements BeerService {
         }
 
 
-        return beerPageList;
+        return beerPagedList;
     }
 
     @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventoryOnHand == false ")
