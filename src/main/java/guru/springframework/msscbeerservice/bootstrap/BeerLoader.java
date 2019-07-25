@@ -25,9 +25,10 @@ public class BeerLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if(beerRepository.count() == 0) {
-            loadBeerObjects();
-        };
+
+          if(beerRepository.count() == 0 ) {
+              loadBeerObjects();
+          }
     }
 
     private void loadBeerObjects() {
@@ -61,5 +62,5 @@ public class BeerLoader implements CommandLineRunner {
         beerRepository.save(b1);
         beerRepository.save(b2);
         beerRepository.save(b3);
-        }
+    }
 }
