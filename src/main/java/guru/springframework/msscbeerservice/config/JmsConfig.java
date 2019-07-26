@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class JmsConfig {
 
+    public static final String BREWING_REQUEST_QUEUE = "brewing-request";
+
     @Bean  // Serialize message content to Json using TextMessage
     public MessageConverter jacksonJmsMessageConverter() {
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
