@@ -22,7 +22,7 @@ class BeerInventoryServiceRestTemplateImplTest {
     }
 
     @Test
-    void getOnHandInventory() {
+    void getOnhandInventory() {
 
         //TODO: Evolve to use UPC
 //        Integer qoh = beerInventoryService.getOnHandInventory(BeerLoader.BEER_1_UUID);
