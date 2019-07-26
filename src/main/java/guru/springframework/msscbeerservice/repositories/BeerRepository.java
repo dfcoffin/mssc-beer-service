@@ -12,7 +12,6 @@ import java.util.UUID;
  * Created by Donald F. Coffin on 07/05/2019 at 13:21
  */
 public interface BeerRepository extends PagingAndSortingRepository<Beer, UUID> {
-
     Page<Beer> findAllByBeerName(String beerName, Pageable pageable);
 
     Page<Beer> findAllByBeerStyle(BeerStyleEnum beerStyle, Pageable pageable);
