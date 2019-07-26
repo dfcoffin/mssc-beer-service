@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 public class JmsConfig {
 
     public static final String BREWING_REQUEST_QUEUE = "brewing-request";
+    public static final String NEW_INVENTORY_QUEUE = "new-inventory";
 
     @Bean  // Serialize message content to Json using TextMessage
     public MessageConverter jacksonJmsMessageConverter() {
